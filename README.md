@@ -36,3 +36,36 @@ BloodBridge is a full-stack blood donation platform that connects blood donors w
 - Git & GitHub for version control
 
 ---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/nafiznayan/BloodBridge.git
+cd BloodBridge
+```
+
+### 2. Install dependencies
+
+npm install
+
+### 3. Configure environment variables
+
+Create a .env file in the root directory and add:
+
+DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
+
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key-here"
+
+JWT_SECRET="your_jwt_secret"
+
+### 4. Set up Prisma
+
+npx prisma generate
+npx prisma migrate dev --name init
+
+### 5. Run the development server
+
+npm run dev
