@@ -1,33 +1,58 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Hospital, Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { toast } from 'sonner';
-import { BLOOD_GROUP_LABELS, URGENCY_LABELS, URGENCY_COLORS, type BloodGroup, type UrgencyLevel } from '@/lib/types';
+import { useState } from "react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import {
+  AlertTriangle,
+  Hospital,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+} from "lucide-react";
+import { toast } from "sonner";
+import {
+  BLOOD_GROUP_LABELS,
+  URGENCY_LABELS,
+  URGENCY_COLORS,
+  type BloodGroup,
+  type UrgencyLevel,
+} from "@/lib/types";
 
 export default function RequestPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    patientName: '',
-    hospitalName: '',
-    city: '',
-    state: '',
-    bloodGroup: '' as BloodGroup,
-    urgency: '' as UrgencyLevel,
-    unitsNeeded: '',
-    contactName: '',
-    contactPhone: '',
-    contactEmail: '',
-    additionalInfo: '',
+    patientName: "",
+    hospitalName: "",
+    city: "",
+    state: "",
+    bloodGroup: "" as BloodGroup,
+    urgency: "" as UrgencyLevel,
+    unitsNeeded: "",
+    contactName: "",
+    contactPhone: "",
+    contactEmail: "",
+    additionalInfo: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,10 +60,10 @@ export default function RequestPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/requests', {
-        method: 'POST',
+      const response = await fetch("/api/requests", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...formData,
@@ -47,39 +72,43 @@ export default function RequestPage() {
       });
 
       if (response.ok) {
-        toast.success('Blood request submitted successfully! We will notify available donors.');
+        toast.success(
+          "Blood request submitted successfully! We will notify available donors."
+        );
         setFormData({
-          patientName: '',
-          hospitalName: '',
-          city: '',
-          state: '',
-          bloodGroup: '' as BloodGroup,
-          urgency: '' as UrgencyLevel,
-          unitsNeeded: '',
-          contactName: '',
-          contactPhone: '',
-          contactEmail: '',
-          additionalInfo: '',
+          patientName: "",
+          hospitalName: "",
+          city: "",
+          state: "",
+          bloodGroup: "" as BloodGroup,
+          urgency: "" as UrgencyLevel,
+          unitsNeeded: "",
+          contactName: "",
+          contactPhone: "",
+          contactEmail: "",
+          additionalInfo: "",
         });
       } else {
         const error = await response.json();
-        toast.error(error.message || 'Failed to submit request. Please try again.');
+        toast.error(
+          error.message || "Failed to submit request. Please try again."
+        );
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again.');
+      toast.error("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
@@ -87,9 +116,12 @@ export default function RequestPage() {
               <AlertTriangle className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Request Blood</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Request Blood
+          </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Submit an urgent blood request and we'll notify available donors in your area immediately.
+            Submit an urgent blood request and we'll notify available donors in
+            your area immediately.
           </p>
         </div>
 
@@ -98,10 +130,13 @@ export default function RequestPage() {
           <div className="flex items-start">
             <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 mr-3" />
             <div>
-              <h3 className="text-sm font-semibold text-red-800 mb-1">Emergency Protocol</h3>
+              <h3 className="text-sm font-semibold text-red-800 mb-1">
+                Emergency Protocol
+              </h3>
               <p className="text-sm text-red-700">
-                For life-threatening emergencies, please call 911 immediately. This platform 
-                complements but does not replace emergency medical services.
+                For life-threatening emergencies, please call 911 immediately.
+                This platform complements but does not replace emergency medical
+                services.
               </p>
             </div>
           </div>
@@ -111,7 +146,8 @@ export default function RequestPage() {
           <CardHeader>
             <CardTitle>Blood Request Form</CardTitle>
             <CardDescription>
-              Please provide detailed information to help us find suitable donors quickly.
+              Please provide detailed information to help us find suitable
+              donors quickly.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -123,13 +159,15 @@ export default function RequestPage() {
                     <Hospital className="h-5 w-5 mr-2 text-red-600" />
                     Patient & Hospital Details
                   </h3>
-                  
+
                   <div>
                     <Label htmlFor="patientName">Patient Name *</Label>
                     <Input
                       id="patientName"
                       value={formData.patientName}
-                      onChange={(e) => handleInputChange('patientName', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("patientName", e.target.value)
+                      }
                       required
                       placeholder="Enter patient's full name"
                     />
@@ -140,7 +178,9 @@ export default function RequestPage() {
                     <Input
                       id="hospitalName"
                       value={formData.hospitalName}
-                      onChange={(e) => handleInputChange('hospitalName', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("hospitalName", e.target.value)
+                      }
                       required
                       placeholder="Enter hospital name"
                     />
@@ -152,7 +192,9 @@ export default function RequestPage() {
                       <Input
                         id="city"
                         value={formData.city}
-                        onChange={(e) => handleInputChange('city', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("city", e.target.value)
+                        }
                         required
                         placeholder="City"
                       />
@@ -162,7 +204,9 @@ export default function RequestPage() {
                       <Input
                         id="state"
                         value={formData.state}
-                        onChange={(e) => handleInputChange('state', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("state", e.target.value)
+                        }
                         required
                         placeholder="State"
                       />
@@ -172,16 +216,23 @@ export default function RequestPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="bloodGroup">Blood Group Required *</Label>
-                      <Select value={formData.bloodGroup} onValueChange={(value: BloodGroup) => handleInputChange('bloodGroup', value)}>
+                      <Select
+                        value={formData.bloodGroup}
+                        onValueChange={(value: BloodGroup) =>
+                          handleInputChange("bloodGroup", value)
+                        }
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="Select blood group" />
                         </SelectTrigger>
                         <SelectContent>
-                          {Object.entries(BLOOD_GROUP_LABELS).map(([key, label]) => (
-                            <SelectItem key={key} value={key}>
-                              {label}
-                            </SelectItem>
-                          ))}
+                          {Object.entries(BLOOD_GROUP_LABELS).map(
+                            ([key, label]) => (
+                              <SelectItem key={key} value={key}>
+                                {label}
+                              </SelectItem>
+                            )
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
@@ -193,7 +244,9 @@ export default function RequestPage() {
                         min="1"
                         max="10"
                         value={formData.unitsNeeded}
-                        onChange={(e) => handleInputChange('unitsNeeded', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("unitsNeeded", e.target.value)
+                        }
                         required
                         placeholder="1"
                       />
@@ -202,7 +255,12 @@ export default function RequestPage() {
 
                   <div>
                     <Label htmlFor="urgency">Urgency Level *</Label>
-                    <Select value={formData.urgency} onValueChange={(value: UrgencyLevel) => handleInputChange('urgency', value)}>
+                    <Select
+                      value={formData.urgency}
+                      onValueChange={(value: UrgencyLevel) =>
+                        handleInputChange("urgency", value)
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select urgency level" />
                       </SelectTrigger>
@@ -210,7 +268,11 @@ export default function RequestPage() {
                         {Object.entries(URGENCY_LABELS).map(([key, label]) => (
                           <SelectItem key={key} value={key}>
                             <div className="flex items-center">
-                              <div className={`w-2 h-2 rounded-full mr-2 ${URGENCY_COLORS[key as UrgencyLevel]}`}></div>
+                              <div
+                                className={`w-2 h-2 rounded-full mr-2 ${
+                                  URGENCY_COLORS[key as UrgencyLevel]
+                                }`}
+                              ></div>
                               {label}
                             </div>
                           </SelectItem>
@@ -232,7 +294,9 @@ export default function RequestPage() {
                     <Input
                       id="contactName"
                       value={formData.contactName}
-                      onChange={(e) => handleInputChange('contactName', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("contactName", e.target.value)
+                      }
                       required
                       placeholder="Name of person to contact"
                     />
@@ -244,7 +308,9 @@ export default function RequestPage() {
                       id="contactPhone"
                       type="tel"
                       value={formData.contactPhone}
-                      onChange={(e) => handleInputChange('contactPhone', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("contactPhone", e.target.value)
+                      }
                       required
                       placeholder="Phone number for immediate contact"
                     />
@@ -256,18 +322,24 @@ export default function RequestPage() {
                       id="contactEmail"
                       type="email"
                       value={formData.contactEmail}
-                      onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("contactEmail", e.target.value)
+                      }
                       required
                       placeholder="Email address"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="additionalInfo">Additional Information</Label>
+                    <Label htmlFor="additionalInfo">
+                      Additional Information
+                    </Label>
                     <Textarea
                       id="additionalInfo"
                       value={formData.additionalInfo}
-                      onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("additionalInfo", e.target.value)
+                      }
                       placeholder="Any additional details that might help donors..."
                       rows={4}
                     />
@@ -276,24 +348,45 @@ export default function RequestPage() {
                   {/* Request Summary */}
                   {formData.bloodGroup && formData.urgency && (
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-2">Request Summary</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        Request Summary
+                      </h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span>Blood Group:</span>
-                          <Badge variant="outline" className="text-red-600 border-red-600">
+                          <Badge
+                            variant="outline"
+                            className="text-red-600 border-red-600"
+                          >
                             {BLOOD_GROUP_LABELS[formData.bloodGroup]}
                           </Badge>
                         </div>
                         <div className="flex justify-between">
                           <span>Urgency:</span>
-                          <Badge className={`${URGENCY_COLORS[formData.urgency]} text-white`}>
+                          <Badge
+                            className={`text-white ${
+                              formData.urgency === "CRITICAL"
+                                ? "bg-red-500"
+                                : formData.urgency === "HIGH"
+                                ? "bg-orange-500"
+                                : formData.urgency === "MEDIUM"
+                                ? "bg-yellow-500"
+                                : formData.urgency === "LOW"
+                                ? "bg-green-500"
+                                : ""
+                            }`}
+                          >
                             {URGENCY_LABELS[formData.urgency]}
                           </Badge>
+
+                          {/* <span>{formData.urgency}</span> */}
                         </div>
                         {formData.unitsNeeded && (
                           <div className="flex justify-between">
                             <span>Units Needed:</span>
-                            <span className="font-medium">{formData.unitsNeeded}</span>
+                            <span className="font-medium">
+                              {formData.unitsNeeded}
+                            </span>
                           </div>
                         )}
                       </div>
@@ -303,12 +396,12 @@ export default function RequestPage() {
               </div>
 
               <div className="pt-6 border-t">
-                <Button 
-                  type="submit" 
-                  className="w-full bg-red-600 hover:bg-red-700" 
+                <Button
+                  type="submit"
+                  className="w-full bg-red-600 hover:bg-red-700"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Submitting Request...' : 'Submit Blood Request'}
+                  {isLoading ? "Submitting Request..." : "Submit Blood Request"}
                 </Button>
               </div>
             </form>
@@ -349,7 +442,8 @@ export default function RequestPage() {
                 </div>
                 <h4 className="font-semibold mb-2">Direct Contact</h4>
                 <p className="text-sm text-gray-600">
-                  Donors will contact you directly using the information provided.
+                  Donors will contact you directly using the information
+                  provided.
                 </p>
               </div>
             </div>
