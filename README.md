@@ -57,6 +57,7 @@ Create a .env file in the root directory and add:
 DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
 
 NEXTAUTH_URL="http://localhost:3000"
+
 NEXTAUTH_SECRET="your-secret-key-here"
 
 JWT_SECRET="your_jwt_secret"
