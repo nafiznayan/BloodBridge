@@ -1,69 +1,88 @@
-import Header from '@/components/header';
-import Footer from '@/components/footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Heart, Users, Clock, Shield, Phone, MapPin, Activity } from 'lucide-react';
-import Link from 'next/link';
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Heart,
+  Users,
+  Clock,
+  Shield,
+  Phone,
+  MapPin,
+  Activity,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const features = [
     {
       icon: <Users className="h-8 w-8 text-red-600" />,
-      title: 'Community Network',
-      description: 'Connect with a growing network of verified blood donors in your area.',
+      title: "Community Network",
+      description:
+        "Connect with a growing network of verified blood donors in your area.",
     },
     {
       icon: <Clock className="h-8 w-8 text-red-600" />,
-      title: 'Quick Response',
-      description: 'Find available donors instantly when time is critical.',
+      title: "Quick Response",
+      description: "Find available donors instantly when time is critical.",
     },
     {
       icon: <Shield className="h-8 w-8 text-red-600" />,
-      title: 'Safe & Verified',
-      description: 'All donors are verified and follow strict safety protocols.',
+      title: "Safe & Verified",
+      description:
+        "All donors are verified and follow strict safety protocols.",
     },
     {
       icon: <Activity className="h-8 w-8 text-red-600" />,
-      title: 'Real-time Updates',
-      description: 'Get live updates on donor availability and blood requests.',
+      title: "Real-time Updates",
+      description: "Get live updates on donor availability and blood requests.",
     },
   ];
 
   const stats = [
-    { number: '10,000+', label: 'Registered Donors' },
-    { number: '5,000+', label: 'Lives Saved' },
-    { number: '50+', label: 'Cities Covered' },
-    { number: '24/7', label: 'Emergency Support' },
+    { number: "10,000+", label: "Registered Donors" },
+    { number: "5,000+", label: "Lives Saved" },
+    { number: "50+", label: "Cities Covered" },
+    { number: "24/7", label: "Emergency Support" },
   ];
 
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-red-50 to-pink-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Connecting Donors,{' '}
+                Connecting Donors,{" "}
                 <span className="text-red-600">Saving Lives</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Join BloodBridge, the community-driven platform that connects blood donors 
-                with those in urgent need. Every donation can save up to three lives.
+                Join BloodBridge, the community-driven platform that connects
+                blood donors with those in urgent need. Every donation can save
+                up to three lives.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-red-600 hover:bg-red-700"
+                >
                   <Link href="/register">
                     <Heart className="mr-2 h-5 w-5 fill-current" />
                     Become a Donor
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/donors">
-                    Find Donors Near You
-                  </Link>
+                  <Link href="/donors">Find Donors Near You</Link>
                 </Button>
               </div>
             </div>
@@ -78,13 +97,16 @@ export default function Home() {
                 <div className="space-y-3">
                   <div className="flex items-center text-gray-600">
                     <MapPin className="h-4 w-4 mr-2 text-red-600" />
-                    <span className="text-sm">Mumbai, Maharashtra</span>
+                    <span className="text-sm">Dhaka, Bangladesh</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Activity className="h-4 w-4 mr-2 text-red-600" />
-                    <span className="text-sm">Blood Group: O- (Critical)</span>
+                    <span className="text-sm">Blood Group: O+ (Critical)</span>
                   </div>
-                  <Button className="w-full bg-red-600 hover:bg-red-700" asChild>
+                  <Button
+                    className="w-full bg-red-600 hover:bg-red-700"
+                    asChild
+                  >
                     <Link href="/request">Request Blood Now</Link>
                   </Button>
                 </div>
@@ -120,17 +142,18 @@ export default function Home() {
               Why Choose BloodBridge?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our platform makes blood donation simple, safe, and effective. 
+              Our platform makes blood donation simple, safe, and effective.
               Connect with your community and make a real difference.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="text-center hover:shadow-lg transition-shadow"
+              >
                 <CardHeader>
-                  <div className="flex justify-center mb-4">
-                    {feature.icon}
-                  </div>
+                  <div className="flex justify-center mb-4">{feature.icon}</div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -151,8 +174,9 @@ export default function Home() {
             Ready to Save Lives?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Join thousands of heroes who are making a difference in their communities. 
-            Your donation can be the gift of life for someone in need.
+            Join thousands of heroes who are making a difference in their
+            communities. Your donation can be the gift of life for someone in
+            need.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-red-600 hover:bg-red-700">

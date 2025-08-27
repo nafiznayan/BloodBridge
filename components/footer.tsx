@@ -1,7 +1,9 @@
-import { Heart, Mail, Phone, MapPin } from 'lucide-react';
-import Link from 'next/link';
+import { Heart, Mail, Phone, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -15,13 +17,14 @@ export default function Footer() {
               <span className="text-xl font-bold">BloodBridge</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Connecting blood donors with those in urgent need. Join our community-driven 
-              network for faster, smarter, and life-saving blood donation connections.
+              Connecting blood donors with those in urgent need. Join our
+              community-driven network for faster, smarter, and life-saving
+              blood donation connections.
             </p>
             <div className="flex space-x-4">
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+880 1860123456</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Mail className="h-4 w-4" />
@@ -35,22 +38,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/donors" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/donors"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Find Donors
                 </Link>
               </li>
               <li>
-                <Link href="/register" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/register"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Register as Donor
                 </Link>
               </li>
               <li>
-                <Link href="/request" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/request"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Request Blood
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   About Us
                 </Link>
               </li>
@@ -62,22 +77,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/eligibility" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/eligibility"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Donation Eligibility
                 </Link>
               </li>
               <li>
-                <Link href="/safety" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/safety"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Safety Guidelines
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/faq"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Contact Us
                 </Link>
               </li>
@@ -87,7 +114,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 BloodBridge. All rights reserved. Saving lives through community connections.
+            © {currentYear} BloodBridge. All rights reserved. Saving lives
+            through community connections.
           </p>
         </div>
       </div>
