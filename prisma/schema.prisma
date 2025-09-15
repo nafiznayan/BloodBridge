@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Donor {
+  id                String     @id @default(cuid())
+  name              String
+  email             String     @unique
+  password          String
+  phone             String
+  bloodGroup        BloodGroup
+  city              String
+  state             String
+  age               Int
+  weight            Int
+  available         Boolean    @default(true)
+  lastDonationDate  DateTime?
+  medicalConditions String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  requests        BloodRequest[]
+  donationHistory DonationHistory[]
+  notifications   Notification[]
+
+  @@map("donors")
+}
+
+model BloodRequest {
+  id             String       @id @default(cuid())
+  patientName    String
+  hospitalName   String
+  city           String
+  state          String
+  bloodGroup     BloodGroup
+  urgency        UrgencyLevel
+  unitsNeeded    Int
+  contactName    String
+  contactPhone   String
+  contactEmail   String
+  additionalInfo String?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  donor         Donor?         @relation(fields: [donorId], references: [id])
+  donorId       String?
+  notifications Notification[]
+
+  @@map("blood_requests")
+}
+
+model DonationHistory {
+  id           String   @id @default(cuid())
+  donorId      String
+  donationDate DateTime
+  location     String
+  bloodBank    String?
+  unitsGiven   Int      @default(1)
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  donor Donor @relation(fields: [donorId], references: [id], onDelete: Cascade)
+
+  @@map("donation_history")
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  donorId        String
+  bloodRequestId String
+  message        String
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  donor        Donor        @relation(fields: [donorId], references: [id], onDelete: Cascade)
+  bloodRequest BloodRequest @relation(fields: [bloodRequestId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+enum BloodGroup {
+  A_POSITIVE
+  A_NEGATIVE
+  B_POSITIVE
+  B_NEGATIVE
+  AB_POSITIVE
+  AB_NEGATIVE
+  O_POSITIVE
+  O_NEGATIVE
+}
+
+enum UrgencyLevel {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
